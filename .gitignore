@@ -1,14 +1,56 @@
-Binaries
-DerivedDataCache
-Intermediate
-Saved
-.vscode
-.vs
+﻿# UE4 project folders to ignore
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vscode/
+
+# Ignore build system files
 *.VC.db
-*.opensdf
-*.opendb
-*.sdf
-*.sln
+*.VC.opendb
+.vs/
+
+# Ignore user-specific files
 *.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore Mac-specific files
+.DS_Store
+
+# Ignore crash reports and logs
+*.log
+*.dmp
+
+# Ignore compiled assets
+*.exe
+*.dll
+*.pdb
+*.lib
+*.app
+*.ipa
+*.apk
 *.xcodeproj
 *.xcworkspace
+
+# Ignore autosaves
+Autosaves/
+Backup/
+
+# Ignore custom launcher stuff
+*.opensdf
+*.tlog
+*.cache
+*.obj
+
+# Ignore packaging output
+Build/
+
+# Ignore project-specific settings not needed in repo
+*.code-workspace
+*.sln
+
+# Optional: ignore plugins if they're not part of repo
+Plugins/*/Binaries/
+Plugins/*/Intermediate/
