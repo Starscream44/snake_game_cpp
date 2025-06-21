@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "SnakeBase.generated.h"
 
+class ASnakeElementBase;
+
 UCLASS()
 class SNAKEGAME_API ASnakeBase : public AActor
 {
@@ -15,6 +17,15 @@ public:
 	// Sets default values for this actor's properties
 	ASnakeBase();
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ASnakeElementBase> SnakeElementClass; // Class of the snake element
+
+	UPROPERTY(BlueprintReadOnly)
+	TArray<ASnakeElementBase*> SnakeElements; // Array to hold the snake elements
+
+	UPROPERTY(EditDefaultsOnly)
+	float ElementSize; // Size of the snake element
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -22,5 +33,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void AddSnakeElement(int ElementsNum = 1); // Function to add a new snake element
 
 };
