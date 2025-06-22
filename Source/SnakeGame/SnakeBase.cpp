@@ -38,14 +38,18 @@ void ASnakeBase::AddSnakeElement(int ElementsNum)
 		FVector NewLocation(SnakeElements.Num() * ElementSize, 0, 0);
 		FTransform NewTransform(NewLocation);
 		ASnakeElementBase* NewSnakeElem = GetWorld()->SpawnActor<ASnakeElementBase>(SnakeElementClass, NewTransform);
-		SnakeElements.Add(NewSnakeElem);
+		int32 ElemIndex = SnakeElements.Add(NewSnakeElem);
+		if (ElemIndex == 0)
+		{
+			NewSnakeElem->SetFirstElementType();
+		}
 	}
 }
 
 void ASnakeBase::Move()
 {
 	FVector MovementVector(ForceInitToZero);
-	float MovementSpeed = ElementSize;
+	MovementSpeed = ElementSize;
 
 	switch (LastMoveDirection)
 	{

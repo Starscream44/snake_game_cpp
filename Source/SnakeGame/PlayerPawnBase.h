@@ -40,4 +40,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void CreateSnakeActor();
+
+	UFUNCTION()
+	void HandlePlayerVerticalInput(float Value);
+	UFUNCTION()
+	void HandlePlayerHorizontalInput(float Value);
 };
