@@ -52,4 +52,6 @@ public:
 	void AddSnakeElement(int ElementsNum = 1); // Function to add a new snake element
 
 	void Move();
+	UFUNCTION()
+	void SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActor* Other); // Function to handle overlap events
 };
