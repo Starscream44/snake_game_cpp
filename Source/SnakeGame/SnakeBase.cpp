@@ -20,7 +20,8 @@ ASnakeBase::ASnakeBase()
 void ASnakeBase::BeginPlay()
 {
 	Super::BeginPlay();
-	SetActorTickInterval(MovementSpeed);
+	BaseMovementSpeed = MovementSpeed;
+	SetActorTickInterval(BaseMovementSpeed);
 	AddSnakeElement(3);
 	
 }
@@ -157,9 +158,21 @@ void ASnakeBase::SpawnFood()
 	}
 }
 
+void ASnakeBase::ResetSpeed()
+{
+	CurrentSpeedMultiplier = 1.f;
+	SetActorTickInterval(BaseMovementSpeed);
+}
+
 void ASnakeBase::SetSpeedMultiplier(float Multiplier)
 {
-	MovementSpeed /= Multiplier; // чем меньше интервал, тем быстрее
-	SetActorTickInterval(MovementSpeed);
+	if (Multiplier < CurrentSpeedMultiplier)
+		return; // не даём сделать ещё быстрее
 
+	CurrentSpeedMultiplier = Multiplier;
+	SetActorTickInterval(BaseMovementSpeed / CurrentSpeedMultiplier);
+
+	GetWorld()->GetTimerManager().ClearTimer(SpeedResetTimer);
+	GetWorld()->GetTimerManager().SetTimer(SpeedResetTimer, this, &ASnakeBase::ResetSpeed, 5.f, false);
 }
+

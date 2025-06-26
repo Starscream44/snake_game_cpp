@@ -76,4 +76,11 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Food Spawn")
 	int32 FoodSpawnRangeY = 5;
 
+	float BaseMovementSpeed = 10.f;
+	float CurrentSpeedMultiplier = 1.f;
+	FTimerHandle SpeedResetTimer;
+
+	void ResetSpeed();
+	
+
 };
