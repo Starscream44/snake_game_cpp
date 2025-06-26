@@ -3,8 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Food.h"
 #include "GameFramework/Actor.h"
 #include "SnakeBase.generated.h"
+
 
 class ASnakeElementBase;
 
@@ -54,4 +56,11 @@ public:
 	void Move();
 	UFUNCTION()
 	void SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActor* Other); // Function to handle overlap events
+	
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AFood> FoodClass;
+
+	void SpawnFood();
+
 };

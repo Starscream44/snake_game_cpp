@@ -20,7 +20,7 @@ void ASnakeBase::BeginPlay()
 {
 	Super::BeginPlay();
 	SetActorTickInterval(MovementSpeed);
-	AddSnakeElement(5);
+	AddSnakeElement(3);
 	
 }
 
@@ -34,17 +34,30 @@ void ASnakeBase::Tick(float DeltaTime)
 void ASnakeBase::AddSnakeElement(int ElementsNum)
 
 {
-	for(int i = 0; i < ElementsNum; ++i)
+	for (int i = 0; i < ElementsNum; ++i)
 	{
-		FVector NewLocation(SnakeElements.Num() * ElementSize, 0, 0);
+		FVector NewLocation;
+
+		if (SnakeElements.Num() == 0)
+		{
+			// ѕервый сегмент Ч в позиции головы
+			NewLocation = GetActorLocation();
+		}
+		else
+		{
+			// ¬се последующие Ч на месте последнего сегмента
+			ASnakeElementBase* Tail = SnakeElements.Last();
+			NewLocation = Tail->GetActorLocation();
+		}
+
 		FTransform NewTransform(NewLocation);
 		ASnakeElementBase* NewSnakeElem = GetWorld()->SpawnActor<ASnakeElementBase>(SnakeElementClass, NewTransform);
 		NewSnakeElem->SnakeOwner = this;
+
 		int32 ElemIndex = SnakeElements.Add(NewSnakeElem);
 		if (ElemIndex == 0)
 		{
 			NewSnakeElem->SetFirstElementType();
-			
 		}
 	}
 }
@@ -105,5 +118,33 @@ void ASnakeBase::SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActo
 		}
 	}
 }
-	
 
+void ASnakeBase::SpawnFood()
+{
+	FVector NewLocation;
+
+	bool bValidLocationFound = false;
+	int MaxTries = 100;
+
+	while (!bValidLocationFound && MaxTries-- > 0)
+	{
+		int32 RandX = FMath::RandRange(-7, 7);
+		int32 RandY = FMath::RandRange(-7, 7);
+		NewLocation = FVector(RandX * ElementSize, RandY * ElementSize, 0.f);
+
+		bValidLocationFound = true;
+		for (auto* Elem : SnakeElements)
+		{
+			if (Elem->GetActorLocation().Equals(NewLocation, 0.1f))
+			{
+				bValidLocationFound = false;
+				break;
+			}
+		}
+	}
+
+	if (bValidLocationFound)
+	{
+		GetWorld()->SpawnActor<AFood>(FoodClass, NewLocation, FRotator::ZeroRotator);
+	}
+}
