@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Food.h"
+#include "CoolFood.h"
 #include "GameFramework/Actor.h"
 #include "SnakeBase.generated.h"
 
@@ -62,5 +63,17 @@ public:
 	TSubclassOf<class AFood> FoodClass;
 
 	void SpawnFood();
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class ACoolFood> CoolFoodClass;
+
+	// метод для ускорения (если ещё нет)
+	void SetSpeedMultiplier(float Multiplier);
+
+	UPROPERTY(EditAnywhere, Category = "Food Spawn")
+	int32 FoodSpawnRangeX = 5;
+
+	UPROPERTY(EditAnywhere, Category = "Food Spawn")
+	int32 FoodSpawnRangeY = 5;
 
 };

@@ -122,14 +122,13 @@ void ASnakeBase::SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActo
 void ASnakeBase::SpawnFood()
 {
 	FVector NewLocation;
-
 	bool bValidLocationFound = false;
 	int MaxTries = 100;
 
 	while (!bValidLocationFound && MaxTries-- > 0)
 	{
-		int32 RandX = FMath::RandRange(-7, 7);
-		int32 RandY = FMath::RandRange(-7, 7);
+		int32 RandX = FMath::RandRange(-FoodSpawnRangeX, FoodSpawnRangeX);
+		int32 RandY = FMath::RandRange(-FoodSpawnRangeY, FoodSpawnRangeY);
 		NewLocation = FVector(RandX * ElementSize, RandY * ElementSize, 0.f);
 
 		bValidLocationFound = true;
@@ -145,6 +144,21 @@ void ASnakeBase::SpawnFood()
 
 	if (bValidLocationFound)
 	{
-		GetWorld()->SpawnActor<AFood>(FoodClass, NewLocation, FRotator::ZeroRotator);
+		// Выбор класса для спавна
+		TSubclassOf<AFood> ClassToSpawn = FoodClass;
+		if (FMath::FRand() < 0.3f) // 30% шанс
+		{
+			ClassToSpawn = CoolFoodClass;
+		}
+
+		//Спавн еды
+		GetWorld()->SpawnActor<AFood>(ClassToSpawn, NewLocation, FRotator::ZeroRotator);
 	}
+}\
+
+void ASnakeBase::SetSpeedMultiplier(float Multiplier)
+{
+	MovementSpeed /= Multiplier; // чем меньше интервал, тем быстрее
+	SetActorTickInterval(MovementSpeed);
+
 }
