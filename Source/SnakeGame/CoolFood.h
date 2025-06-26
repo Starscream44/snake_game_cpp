@@ -8,7 +8,7 @@
 #include "CoolFood.generated.h"
 
 UCLASS()
-class SNAKEGAME_API ACoolFood : public AActor
+class SNAKEGAME_API ACoolFood : public AFood 
 {
 	GENERATED_BODY()
 	

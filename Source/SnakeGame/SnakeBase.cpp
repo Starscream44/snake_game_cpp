@@ -4,6 +4,7 @@
 #include "SnakeBase.h"
 #include "SnakeElementBase.h"
 #include "Interactable.h"
+#include "CoolFood.h"
 
 // Sets default values
 ASnakeBase::ASnakeBase()
@@ -154,7 +155,7 @@ void ASnakeBase::SpawnFood()
 		//Спавн еды
 		GetWorld()->SpawnActor<AFood>(ClassToSpawn, NewLocation, FRotator::ZeroRotator);
 	}
-}\
+}
 
 void ASnakeBase::SetSpeedMultiplier(float Multiplier)
 {
