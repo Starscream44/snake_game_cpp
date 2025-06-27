@@ -3,6 +3,8 @@
 
 #include "CoolFood.h"
 #include "SnakeBase.h"
+#include "SnakeGameGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ACoolFood::ACoolFood()
@@ -33,7 +35,8 @@ void ACoolFood::Interact(AActor* Interactor, bool bIsHead)
     auto Snake = Cast<ASnakeBase>(Interactor);
     if (!IsValid(Snake)) return;
 
-    // Выбор бонуса
+    int32 Points = 1; // по умолчанию
+
     if (FMath::RandBool()) // 50%
     {
         Snake->SetSpeedMultiplier(2.f); // Ускорение
@@ -41,8 +44,17 @@ void ACoolFood::Interact(AActor* Interactor, bool bIsHead)
     else
     {
         Snake->AddSnakeElement(2); // +2 блока
+        Points = 2;
     }
 
-    Snake->SpawnFood(); // Спавн новой еды
+    Snake->SpawnFood();
+
+    ASnakeGameGameModeBase* GameMode = Cast<ASnakeGameGameModeBase>(UGameplayStatics::GetGameMode(this));
+    if (GameMode)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("CoolFood добавляет %d очков."), Points); //  для отладки
+        GameMode->AddSnakeLength(Points);
+    }
+
     Destroy();
 }

@@ -3,6 +3,8 @@
 
 #include "Food.h"
 #include "SnakeBase.h"
+#include "SnakeGameGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AFood::AFood()
@@ -35,8 +37,12 @@ void AFood::Interact(AActor* Interactor,bool bIsHead)
 		{
 			Snake->AddSnakeElement();
 			Snake->SpawnFood();
+			ASnakeGameGameModeBase* GameMode = Cast<ASnakeGameGameModeBase>(UGameplayStatics::GetGameMode(this));
+			if (GameMode)
+			{
+				GameMode->AddSnakeLength(1); // обычная еда
+			}
 			Destroy();
 		}
 	}
 }
-
