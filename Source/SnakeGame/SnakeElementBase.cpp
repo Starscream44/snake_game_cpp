@@ -4,6 +4,7 @@
 #include "SnakeElementBase.h"
 #include "Engine/Classes/Components/StaticMeshComponent.h"
 #include "SnakeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ASnakeElementBase::ASnakeElementBase()
@@ -41,6 +42,7 @@ void ASnakeElementBase::Interact(AActor* Interactor, bool bIsHead)
 	auto Snake = Cast<ASnakeBase>(Interactor);
 	if (IsValid(Snake))
 	{
+		UGameplayStatics::OpenLevel(this, FName("LooseScreen"));
 		Snake->Destroy();
 	}
 }

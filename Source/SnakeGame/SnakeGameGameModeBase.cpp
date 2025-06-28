@@ -2,6 +2,7 @@
 
 
 #include "SnakeGameGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
 
 void ASnakeGameGameModeBase::AddSnakeLength(int32 Amount)
 
@@ -15,5 +16,6 @@ void ASnakeGameGameModeBase::AddSnakeLength(int32 Amount)
 
         // Пока просто лог
         UE_LOG(LogTemp, Warning, TEXT("Победа! Змея достигла максимальной длины."));
+        UGameplayStatics::OpenLevel(this, FName("WinScreen"));
     }
 }
