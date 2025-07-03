@@ -87,8 +87,6 @@ void ASnakeBase::Move()
 		break;
 	}
 
-	//MovementVector.Z = 0.f;
-	//AddActorWorldOffset(MovementVector);
 
 	SnakeElements[0]->ToggleCollision();
 
