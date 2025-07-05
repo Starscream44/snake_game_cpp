@@ -55,6 +55,10 @@ void ACoolFood::Interact(AActor* Interactor, bool bIsHead)
         UE_LOG(LogTemp, Warning, TEXT("CoolFood добавляет %d очков."), Points); //  для отладки
         GameMode->AddSnakeLength(Points);
     }
+    if (EatSound)
+    {
+        UGameplayStatics::PlaySound2D(this, EatSound);
+    }
 
     Destroy();
 }

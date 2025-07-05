@@ -42,6 +42,12 @@ void AFood::Interact(AActor* Interactor,bool bIsHead)
 			{
 				GameMode->AddSnakeLength(1); // обычная еда
 			}
+
+			if (EatSound)
+			{
+				UGameplayStatics::PlaySound2D(this, EatSound);
+			}
+
 			Destroy();
 		}
 	}

@@ -26,4 +26,8 @@ public:
 
 	virtual void Interact(AActor* Interactor, bool bIsHead) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio")
+	USoundBase* EatSound;
+
+
 };
