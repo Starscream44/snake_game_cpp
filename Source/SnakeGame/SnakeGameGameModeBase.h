@@ -19,7 +19,7 @@ public:
 	int32 SnakeLengthProgress = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Snake Progress")
-	int32 MaxSnakeLengthGoal = 50;
+	int32 MaxSnakeLengthGoal = 30;
 
 	UFUNCTION(BlueprintCallable, Category = "Snake Progress")
 	void AddSnakeLength(int32 Amount);
