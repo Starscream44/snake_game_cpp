@@ -47,4 +47,11 @@ public:
 							const FHitResult& SweepResult);
 	UFUNCTION()
 	void ToggleCollision();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sound")
+	USoundBase* CrashSound;
+
+	FTimerHandle CrashTimerHandle;
+	void OnCrashFinished();
+
 };

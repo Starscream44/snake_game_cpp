@@ -31,6 +31,16 @@ void ASnakeElementBase::Tick(float DeltaTime)
 }
 
 
+void ASnakeElementBase::OnCrashFinished()
+{
+	UGameplayStatics::OpenLevel(this, FName("LooseScreen"));
+
+	if (auto Snake = Cast<ASnakeBase>(UGameplayStatics::GetPlayerPawn(this, 0)))
+	{
+		Snake->Destroy();
+	}
+}
+
 
 void ASnakeElementBase::SetFirstElementType_Implementation()
 {
@@ -42,8 +52,13 @@ void ASnakeElementBase::Interact(AActor* Interactor, bool bIsHead)
 	auto Snake = Cast<ASnakeBase>(Interactor);
 	if (IsValid(Snake))
 	{
-		UGameplayStatics::OpenLevel(this, FName("LooseScreen"));
-		Snake->Destroy();
+		if (CrashSound)
+		{
+			UGameplayStatics::PlaySound2D(this, CrashSound);
+		}
+
+		// Запускаем таймер на 0.4 сек перед уничтожением
+		GetWorld()->GetTimerManager().SetTimer(CrashTimerHandle, this, &ASnakeElementBase::OnCrashFinished, 0.4f, false);
 	}
 }
 
