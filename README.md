@@ -2,10 +2,10 @@
 
 A futuristic reimagination of the classic Snake game — made with Unreal Engine 4.  
 Built from scratch using **C++** for core gameplay and **Blueprints** for UI.
+
 <p align="center">
-  <img src="./cyber_snake_logo.png" alt="Cyber Snake Logo" width="220"/>
+  <img src="./cyber_snake_logo.png.png" alt="Cyber Snake Logo" width="220"/>
 </p>
----
 
 ## 🎮 Gameplay
 
