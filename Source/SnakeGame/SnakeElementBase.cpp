@@ -57,7 +57,7 @@ void ASnakeElementBase::Interact(AActor* Interactor, bool bIsHead)
 			UGameplayStatics::PlaySound2D(this, CrashSound);
 		}
 
-		// Запускаем таймер на 0.4 сек перед уничтожением
+		//delay the crash handling to allow the sound to play
 		GetWorld()->GetTimerManager().SetTimer(CrashTimerHandle, this, &ASnakeElementBase::OnCrashFinished, 0.4f, false);
 	}
 }

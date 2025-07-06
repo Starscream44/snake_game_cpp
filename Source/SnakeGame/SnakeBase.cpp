@@ -42,12 +42,12 @@ void ASnakeBase::AddSnakeElement(int ElementsNum)
 
 		if (SnakeElements.Num() == 0)
 		{
-			// Первый сегмент — в позиции головы
+			// first element 
 			NewLocation = GetActorLocation();
 		}
 		else
 		{
-			// Все последующие — на месте последнего сегмента
+			
 			ASnakeElementBase* Tail = SnakeElements.Last();
 			NewLocation = Tail->GetActorLocation();
 		}
@@ -144,14 +144,14 @@ void ASnakeBase::SpawnFood()
 
 	if (bValidLocationFound)
 	{
-		// Выбор класса для спавна
+		//choose food class randomly
 		TSubclassOf<AFood> ClassToSpawn = FoodClass;
-		if (FMath::FRand() < 0.3f) // 30% шанс
+		if (FMath::FRand() < 0.3f) // 30% chance to spawn cool food
 		{
 			ClassToSpawn = CoolFoodClass;
 		}
 
-		//Спавн еды
+		//spawn food
 		GetWorld()->SpawnActor<AFood>(ClassToSpawn, NewLocation, FRotator::ZeroRotator);
 	}
 }
@@ -165,7 +165,7 @@ void ASnakeBase::ResetSpeed()
 void ASnakeBase::SetSpeedMultiplier(float Multiplier)
 {
 	if (Multiplier < CurrentSpeedMultiplier)
-		return; // не даём сделать ещё быстрее
+		return; //speed limit
 
 	CurrentSpeedMultiplier = Multiplier;
 	SetActorTickInterval(BaseMovementSpeed / CurrentSpeedMultiplier);

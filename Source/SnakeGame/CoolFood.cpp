@@ -35,15 +35,15 @@ void ACoolFood::Interact(AActor* Interactor, bool bIsHead)
     auto Snake = Cast<ASnakeBase>(Interactor);
     if (!IsValid(Snake)) return;
 
-    int32 Points = 1; // по умолчанию
+    int32 Points = 1; 
 
-    if (FMath::RandBool()) // 50%
+    if (FMath::RandBool()) 
     {
-        Snake->SetSpeedMultiplier(2.f); // Ускорение
+        Snake->SetSpeedMultiplier(2.f);
     }
     else
     {
-        Snake->AddSnakeElement(2); // +2 блока
+        Snake->AddSnakeElement(2);
         Points = 2;
     }
 
@@ -52,7 +52,7 @@ void ACoolFood::Interact(AActor* Interactor, bool bIsHead)
     ASnakeGameGameModeBase* GameMode = Cast<ASnakeGameGameModeBase>(UGameplayStatics::GetGameMode(this));
     if (GameMode)
     {
-        UE_LOG(LogTemp, Warning, TEXT("CoolFood добавляет %d очков."), Points); //  для отладки
+		UE_LOG(LogTemp, Warning, TEXT("points added"), Points); //for debugging
         GameMode->AddSnakeLength(Points);
     }
     if (EatSound)

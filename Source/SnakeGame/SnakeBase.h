@@ -55,6 +55,7 @@ public:
 	void AddSnakeElement(int ElementsNum = 1); // Function to add a new snake element
 
 	void Move();
+
 	UFUNCTION()
 	void SnakeElementOverlap(ASnakeElementBase* OverlappedElement, AActor* Other); // Function to handle overlap events
 	
@@ -67,7 +68,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class ACoolFood> CoolFoodClass;
 
-	// метод для ускорения (если ещё нет)
+	//Speed Multiplier for cool food
 	void SetSpeedMultiplier(float Multiplier);
 
 	UPROPERTY(EditAnywhere, Category = "Food Spawn")

@@ -13,9 +13,7 @@ class UInteractable : public UInterface
 	GENERATED_BODY()
 };
 
-/**
- * 
- */
+
 class SNAKEGAME_API IInteractable
 {
 	GENERATED_BODY()

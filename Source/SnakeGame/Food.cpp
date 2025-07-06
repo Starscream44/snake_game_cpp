@@ -40,7 +40,7 @@ void AFood::Interact(AActor* Interactor,bool bIsHead)
 			ASnakeGameGameModeBase* GameMode = Cast<ASnakeGameGameModeBase>(UGameplayStatics::GetGameMode(this));
 			if (GameMode)
 			{
-				GameMode->AddSnakeLength(1); // обычная еда
+				GameMode->AddSnakeLength(1);
 			}
 
 			if (EatSound)
